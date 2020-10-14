@@ -8,7 +8,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool _bigger = false;
+  bool _bigger = true;
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +21,11 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Center(
           child: GestureDetector(
-            child: Container(
-              width: _bigger ? 100 : 500,
+            child: AnimatedContainer(
+              width: _bigger ? 50 : 500,
               child: Image.asset('images/batman_logo.jpg'),
+              duration: Duration(seconds: 1),
+              curve: Curves.easeInOutQuint,
             ),
             onTap: () {
               setState(() {
