@@ -7,8 +7,21 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
-  bool _bigger = true;
+class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
+  Animation<double> _animation;
+  AnimationController _animationController;
+
+  @override
+  void initState() {
+    _animationController = AnimationController(
+      duration: Duration(seconds: 5),
+      vsync: this,
+    );
+
+    _animation = Tween(begin: 0.0, end: 1.0).animate(_animationController);
+    _animationController.forward();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,19 +32,32 @@ class _MyAppState extends State<MyApp> {
           backgroundColor: Colors.black,
           title: Text('Batman Dark Knight Animation'),
         ),
+        backgroundColor: Colors.black,
         body: Center(
-          child: GestureDetector(
-            child: AnimatedContainer(
-              width: _bigger ? 50 : 500,
-              child: Image.asset('images/batman_logo.jpg'),
-              duration: Duration(seconds: 1),
-              curve: Curves.easeInOutQuint,
-            ),
-            onTap: () {
-              setState(() {
-                _bigger = !_bigger;
-              });
-            },
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              Positioned(
+                top: 135.0,
+                right: 10,
+                child: Container(
+                  height: 500,
+                  child: FadeTransition(
+                    opacity: _animationController,
+                    child: Image.asset(
+                      'images/gotham_city2.png',
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                child: Image.asset(
+                  'images/batman.png',
+                  fit: BoxFit.fitHeight,
+                ),
+              ),
+            ],
           ),
         ),
       ),
