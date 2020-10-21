@@ -30,7 +30,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black,
-          title: Text('Batman Dark Knight Animation'),
+          title: Text('Batman Dark Knight'),
         ),
         backgroundColor: Colors.black,
         body: Center(
@@ -45,7 +45,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                   child: FadeTransition(
                     opacity: _animationController,
                     child: Image.asset(
-                      'images/gotham_city2.png',
+                      'images/gotham_city.png',
                       fit: BoxFit.contain,
                     ),
                   ),
