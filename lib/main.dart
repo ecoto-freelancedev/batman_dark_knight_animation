@@ -14,23 +14,24 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     _animationController = AnimationController(
-      duration: Duration(seconds: 5),
+      duration: Duration(seconds: 3),
       vsync: this,
     );
 
     _animation = Tween(begin: 0.0, end: 1.0).animate(_animationController);
-    _animationController.forward();
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Animation',
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black,
-          title: Text('Batman Dark Knight'),
+          title: Center(child: Text('Batman Dark Knight')),
         ),
         backgroundColor: Colors.black,
         body: Center(
@@ -39,7 +40,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
             children: [
               Positioned(
                 top: 135.0,
-                right: 10,
+                right: 25,
                 child: Container(
                   height: 500,
                   child: FadeTransition(
@@ -59,6 +60,14 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
               ),
             ],
           ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.blueGrey[600],
+          child: Image(
+            image: AssetImage('images/batman_logo.png'),
+            fit: BoxFit.cover,
+          ),
+          onPressed: () => _animationController.forward(),
         ),
       ),
     );
